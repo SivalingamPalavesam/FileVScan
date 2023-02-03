@@ -1,0 +1,36 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id "com.google.cloud.tools.jib" version "3.3.1"
+	id 'java'
+}
+
+group = 'com.filescan'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+	maven {
+		url "https://plugins.gradle.org/m2/"
+	}
+}
+
+dependencies {
+	implementation 'com.giffing.bucket4j.spring.boot.starter:bucket4j-spring-boot-starter:0.2.0'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.4'
+	implementation group: 'fi.solita.clamav', name: 'clamav-client', version: '1.0.1'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.4'
+	implementation 'commons-io:commons-io:2.4'
+	implementation 'org.springframework.boot:spring-boot-starter-cache:2.7.4'
+	implementation 'org.ehcache:ehcache:3.10.1'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.4'
+	compileOnly 'org.projectlombok:lombok:1.18.24'
+}
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+apply plugin: "com.google.cloud.tools.jib"

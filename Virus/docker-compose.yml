@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  scan:
+    image: clamav/clamav:0.104
+    container_name: scan
+    restart: always
+    ports:
+      - "3310:3310"
+    networks:
+      - my_net
+
+
+  scanapp:
+    container_name: scanapp
+    image: scanapp:latest
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    ports:
+      - "9898:9898"
+    links:
+      - scan
+    depends_on: 
+      - scan
+networks:
+  my_net:
+    driver: bridge
